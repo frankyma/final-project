@@ -8,9 +8,9 @@ import App from './App';
 const root = ReactDOMClient.createRoot(document.getElementById('root'));
 
 root.render(
-  <React.Fragment>
+  <React.StrictMode>
     {/* CssBaseline kickstart an elegant, consistent, and simple baseline to build upon. */}
     <CssBaseline />
     <App />
-  </React.Fragment>,
+  </React.StrictMode>
 );
