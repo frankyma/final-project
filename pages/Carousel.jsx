@@ -5,13 +5,15 @@ import { Button, TextField } from "@mui/material";
 import useSWRMutation from "swr/mutation";
 import { gifFetcher } from "../src/api/api";
 import { useState } from "react";
+import { Swiper, SwiperSlide } from "swiper/react";
+import { Navigation, Pagination } from "swiper/modules";
 
+import "swiper/css";
+import "swiper/css/navigation";
+import "swiper/css/pagination";
 function Carousel() {
-  const [gifSearch, setGifSearch] = useState(""); // [1
-  const { trigger: fetchGifs, data: gifs } = useSWRMutation(
-    gifSearch,
-    gifFetcher
-  );
+  const [gifSearch, setGifSearch] = useState("");
+  const { trigger: fetchGifs, data } = useSWRMutation(gifSearch, gifFetcher);
 
   return (
     <Container maxWidth="sm">
@@ -28,6 +30,22 @@ function Carousel() {
         <Button variant="contained" onClick={fetchGifs}>
           Search
         </Button>
+        {data?.data && (
+          <Swiper
+            onSlideChange={(...args) =>
+              console.log("slide change, args: ", args)
+            }
+            modules={[Navigation, Pagination]}
+            navigation={true}
+            pagination={true}
+          >
+            {data?.data?.map((gif) => (
+              <SwiperSlide key={gif.id}>
+                <img src={gif.images.original.url} alt={gif.title} />
+              </SwiperSlide>
+            ))}
+          </Swiper>
+        )}
       </Box>
     </Container>
   );
