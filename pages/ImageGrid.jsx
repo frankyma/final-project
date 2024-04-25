@@ -50,14 +50,16 @@ function ImageGrid() {
           GIF Gallery
         </Typography>
         {savedGifs?.record &&
-          Object.entries(savedGifs.record).map(([key, value]) => (
-            <GifCategoryList
-              key={key}
-              category={key}
-              urlList={value}
-              onDelete={handleDelete}
-            />
-          ))}
+          Object.entries(savedGifs.record)
+            .filter(([, value]) => value.length > 0)
+            .map(([key, value]) => (
+              <GifCategoryList
+                key={key}
+                category={key}
+                urlList={value}
+                onDelete={handleDelete}
+              />
+            ))}
       </Box>
       <Footer />
     </>
