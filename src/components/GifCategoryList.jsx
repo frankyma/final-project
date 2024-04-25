@@ -6,7 +6,7 @@ import {
   Typography,
 } from "@mui/material";
 
-export default function GifCategoryList({ category, urlList }) {
+export default function GifCategoryList({ category, urlList, onDelete }) {
   return (
     <>
       <Typography variant="h4" component="h1">
@@ -18,7 +18,9 @@ export default function GifCategoryList({ category, urlList }) {
             <img src={url} alt={category} style={{ height: 200 }} />
           </CardContent>
           <CardActions>
-            <Button size="small">Delete</Button>
+            <Button size="small" onClick={() => onDelete({ category, url })}>
+              Delete
+            </Button>
           </CardActions>
         </Card>
       ))}
