@@ -22,12 +22,7 @@ function Carousel() {
     gifSearch,
     gifFetcher
   );
-  const { trigger: updateSavedGifs, data: mutationResponse } = useSWRMutation(
-    "savedGifs",
-    updateGifs
-  );
-
-  console.log("🚀 ~ Carousel ~ mutationResponse:", mutationResponse);
+  const { trigger: updateSavedGifs } = useSWRMutation("savedGifs", updateGifs);
 
   const onSaveGif = useCallback(() => {
     const gifKey = gifSearch.toLowerCase();
