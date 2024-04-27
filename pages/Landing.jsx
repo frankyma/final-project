@@ -1,21 +1,37 @@
+/*************************************************** 
+                Landing.jsx
+
+Home page of the application
+
+Orders the components that make up the Home page.
+Corresponds to route path='/'
+
+Change History:
+    Pam - Component creation.                  
+*************************************************** */
+
 import Container from '@mui/material/Container';
-import Typography from '@mui/material/Typography';
-import Box from '@mui/material/Box';
+import NavBar from '../src/components/NavBar.jsx';
+import Footer from '../src/components/Footer.jsx';
+import Hero from '../src/components/Hero.jsx';
+import Content from '../src/components/Content.jsx';
+
 
 
 function Landing() {
   
   return (
 
-      <Container maxWidth="sm">
-        <Box sx={{ my: 4 }}>
-          <Typography variant="h4" component="h1" sx={{ mb: 2 }}>
-            Project Landing page
-          </Typography>
-        </Box>
+      <Container disableGutters maxWidth={false}>
+        <NavBar></NavBar>
+        <Hero />
+        <Content />
+        <Footer />
       </Container>
   );
    
 }
+
+
 
 export default Landing;
