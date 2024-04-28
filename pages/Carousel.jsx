@@ -1,3 +1,16 @@
+/*************************************************** 
+                Carousel.jsx
+
+Initiates a GIF search. Displays fetched images.
+
+Uses a Material UI List library component.
+
+Change History:
+    Pam - Create skeleton component to test routing. 
+    Frank - 
+    Pam - Add Header and Footer, component styling.
+          Hide save button                 
+*************************************************** */
 import Container from "@mui/material/Container";
 import Typography from "@mui/material/Typography";
 import Box from "@mui/material/Box";
@@ -13,6 +26,9 @@ import "swiper/css";
 import "swiper/css/navigation";
 import "swiper/css/pagination";
 import { newGifDict } from "../src/utils/utils";
+
+import NavBar from '../src/components/NavBar.jsx';
+import Footer from '../src/components/Footer.jsx';
 
 function Carousel() {
   const [gifSearch, setGifSearch] = useState("");
@@ -37,20 +53,58 @@ function Carousel() {
   ]);
 
   return (
-    <Container maxWidth="sm">
-      <Box sx={{ my: 4 }}>
-        <Typography variant="h4" component="h1" sx={{ mb: 2 }}>
-          Project Carousel page
-        </Typography>
+    
+    <>
+    <NavBar></NavBar>
+
+    <Box display="flex"
+      justifyContent="center"
+      alignItems="center"
+      sx={{
+        height: '100vh',
+        backgroundColor: 'gainsboro',
+        textAlign: 'center',
+        paddingBottom: '1px',}}
+    >
+
+      <Box
+          justifyContent="center"
+          alignItems="start"
+          sx={{
+            minHeight: '90vh',
+            backgroundColor: 'gainsboro',
+            textAlign: 'center',
+            marginTop: '20px',
+            marginBottom: '5px',
+            paddingBottom: '20px',}}
+          >
+
+
+
         <TextField
           variant="outlined"
           defaultValue="Gif Search"
+          label="Keyword"
           value={gifSearch}
           onChange={(e) => setGifSearch(e.target.value)}
         ></TextField>
-        <Button variant="contained" onClick={fetchGifs}>
+
+          <Button variant="contained" onClick={fetchGifs}
+                sx={{ m: 3 }}
+        >
           Search
         </Button>
+
+       
+
+        {giphyResponse?.data && (
+        <Button variant="contained" onClick={onSaveGif}>
+          Save
+        </Button>
+        )}
+
+</Box>
+
         {giphyResponse?.data && (
           <Swiper
             onSlideChange={(swiper) => setCurrentIndex(swiper.activeIndex)}
@@ -65,11 +119,10 @@ function Carousel() {
             ))}
           </Swiper>
         )}
-        <Button variant="contained" onClick={onSaveGif}>
-          Save
-        </Button>
+       
       </Box>
-    </Container>
+      <Footer />
+      </>
   );
 }
 
