@@ -88,7 +88,6 @@ function Carousel() {
             <Box>
               <TextField
                 variant="outlined"
-                defaultValue="Gif Search"
                 label="Keyword"
                 value={gifSearch}
                 onChange={(e) => setGifSearch(e.target.value)}
