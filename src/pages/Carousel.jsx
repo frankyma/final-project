@@ -22,6 +22,7 @@ import { useCallback, useState } from "react";
 import { Swiper, SwiperSlide } from "swiper/react";
 import { Navigation, Pagination } from "swiper/modules";
 import useSWR from "swr";
+import styled from "styled-components";
 
 import "swiper/css";
 import "swiper/css/navigation";
@@ -30,6 +31,10 @@ import { newGifDict } from "../utils/utils.js";
 
 import NavBar from "../components/NavBar.jsx";
 import Footer from "../components/Footer.jsx";
+
+const Img = styled.img`
+  height: 400px;
+`;
 
 function Carousel() {
   const [gifSearch, setGifSearch] = useState("");
@@ -105,14 +110,6 @@ function Carousel() {
           </Grid>
 
           <Grid item xs={12}>
-            {giphyResponse?.data && (
-              <Button variant="contained" onClick={onSaveGif} sx={{ mt: 5 }}>
-                Save
-              </Button>
-            )}
-          </Grid>
-
-          <Grid item xs={12}>
             <Box>
               {giphyResponse?.data && (
                 <Swiper
@@ -125,12 +122,19 @@ function Carousel() {
                 >
                   {giphyResponse?.data?.map((gif) => (
                     <SwiperSlide key={gif.id}>
-                      <img src={gif.images.original.url} alt={gif.title} />
+                      <Img src={gif.images.original.url} alt={gif.title} />
                     </SwiperSlide>
                   ))}
                 </Swiper>
               )}
             </Box>
+          </Grid>
+          <Grid item xs={12}>
+            {giphyResponse?.data && (
+              <Button variant="contained" onClick={onSaveGif} sx={{ mt: 5 }}>
+                Save
+              </Button>
+            )}
           </Grid>
         </Grid>
       </Box>
