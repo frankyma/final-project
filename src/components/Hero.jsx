@@ -28,7 +28,7 @@ const StyledImg = styled.img `
     height: 250px;
     background-size: cover;
     position: relative;
-    margin: 0;
+    margin-bottom: -6px;
     padding: 0;
     object-fit: cover;
 `

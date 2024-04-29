@@ -39,6 +39,7 @@ const Content = () => {
         textAlign: "center",
         marginTop: "0",
         paddingBottom: "30px",
+        borderTop: '1px solid black',
       }}
     >
       <Box display="flex" justifyContent="center" alignItems="center">

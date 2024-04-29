@@ -24,6 +24,7 @@ const Footer = () => {
           color: 'black',
           paddingTop: 5,
           paddingLeft: 5,
+          border: '1px solid black',
         }}
       >
   
