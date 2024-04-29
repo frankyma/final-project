@@ -13,10 +13,10 @@ Change History:
 import Typography from "@mui/material/Typography";
 import Box from "@mui/material/Box";
 import useSWR from "swr";
-import { savedGifsFetcher, updateGifs } from "../src/api/api";
-import Footer from "../src/components/Footer";
-import NavBar from "../src/components/NavBar.jsx";
-import GifCategoryList from "../src/components/GifCategoryList";
+import { savedGifsFetcher, updateGifs } from "../api/api.js";
+import Footer from "../components/Footer.jsx";
+import NavBar from "../components/NavBar.jsx";
+import GifCategoryList from "../components/GifCategoryList.jsx";
 import useSWRMutation from "swr/mutation";
 
 function ImageGrid() {

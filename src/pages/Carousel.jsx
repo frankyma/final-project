@@ -14,10 +14,10 @@ Change History:
 *************************************************** */
 import Grid from "@mui/material/Grid";
 import Box from "@mui/material/Box";
-import Typography from '@mui/material/Typography';
+import Typography from "@mui/material/Typography";
 import { Button, TextField } from "@mui/material";
 import useSWRMutation from "swr/mutation";
-import { gifFetcher, savedGifsFetcher, updateGifs } from "../src/api/api";
+import { gifFetcher, savedGifsFetcher, updateGifs } from "../api/api.js";
 import { useCallback, useState } from "react";
 import { Swiper, SwiperSlide } from "swiper/react";
 import { Navigation, Pagination } from "swiper/modules";
@@ -26,10 +26,10 @@ import useSWR from "swr";
 import "swiper/css";
 import "swiper/css/navigation";
 import "swiper/css/pagination";
-import { newGifDict } from "../src/utils/utils";
+import { newGifDict } from "../utils/utils.js";
 
-import NavBar from '../src/components/NavBar.jsx';
-import Footer from '../src/components/Footer.jsx';
+import NavBar from "../components/NavBar.jsx";
+import Footer from "../components/Footer.jsx";
 
 function Carousel() {
   const [gifSearch, setGifSearch] = useState("");
@@ -54,62 +54,72 @@ function Carousel() {
   ]);
 
   return (
-    
     <>
-    <NavBar></NavBar>
+      <NavBar></NavBar>
 
-    <Box display="flex"
-      justifyContent="center"
-      alignItems="center"
-      sx={{
-        minHeight: '100vh',
-        backgroundColor: 'gainsboro',
-        textAlign: 'center',
-        paddingBottom: '5px',}}
-    >
-            
-      <Grid container spacing={5}>
-
-        <Grid item xs={12}>
-          <Typography variant="h5" sx={{ mb: 3, mt:10, fontWeight: 'bold', fontSize: 20, fontFamily: 'Comic Sans MS'}}>  
-          Search all GIFs
-          </Typography>
-        </Grid>
-
-        <Grid item xs={12}>
-          <Box>
-            <TextField
-              variant="outlined"
-              defaultValue="Gif Search"
-              label="Keyword"
-              value={gifSearch}
-              onChange={(e) => setGifSearch(e.target.value)}
-              sx={{ mt: 4 }}
-            ></TextField>
-
-            <Button variant="contained" onClick={fetchGifs}
-                    sx={{ ml: 3, mt: 5 }}
+      <Box
+        display="flex"
+        justifyContent="center"
+        alignItems="center"
+        sx={{
+          minHeight: "100vh",
+          backgroundColor: "gainsboro",
+          textAlign: "center",
+          paddingBottom: "5px",
+        }}
+      >
+        <Grid container spacing={5}>
+          <Grid item xs={12}>
+            <Typography
+              variant="h5"
+              sx={{
+                mb: 3,
+                mt: 10,
+                fontWeight: "bold",
+                fontSize: 20,
+                fontFamily: "Comic Sans MS",
+              }}
             >
-              Search
-            </Button>
-          </Box>
-        </Grid>
+              Search all GIFs
+            </Typography>
+          </Grid>
 
-        <Grid item xs={12}>
-          {giphyResponse?.data && (
-                <Button variant="contained" onClick={onSaveGif}
-                        sx={{mt: 5 }} 
-                >
-                  Save
-                </Button>
-                )}
-        </Grid>
+          <Grid item xs={12}>
+            <Box>
+              <TextField
+                variant="outlined"
+                defaultValue="Gif Search"
+                label="Keyword"
+                value={gifSearch}
+                onChange={(e) => setGifSearch(e.target.value)}
+                sx={{ mt: 4 }}
+              ></TextField>
 
-        <Grid item xs={12}>
-          <Box>
+              <Button
+                variant="contained"
+                onClick={fetchGifs}
+                sx={{ ml: 3, mt: 5 }}
+              >
+                Search
+              </Button>
+            </Box>
+          </Grid>
+
+          <Grid item xs={12}>
             {giphyResponse?.data && (
+              <Button variant="contained" onClick={onSaveGif} sx={{ mt: 5 }}>
+                Save
+              </Button>
+            )}
+          </Grid>
+
+          <Grid item xs={12}>
+            <Box>
+              {giphyResponse?.data && (
                 <Swiper
-                  onSlideChange={(swiper) => setCurrentIndex(swiper.activeIndex)}
+                  onSlideChange={(swiper) =>
+                    setCurrentIndex(swiper.activeIndex)
+                  }
                   modules={[Navigation, Pagination]}
                   navigation={true}
                   pagination={true}
@@ -120,16 +130,14 @@ function Carousel() {
                     </SwiperSlide>
                   ))}
                 </Swiper>
-              )}            
+              )}
             </Box>
+          </Grid>
         </Grid>
-        
-      </Grid>
-        
-    </Box>
+      </Box>
 
-    <Footer />
-      </>
+      <Footer />
+    </>
   );
 }
 
