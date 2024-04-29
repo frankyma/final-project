@@ -1,3 +1,5 @@
+// API fetch functions
+
 const GIPHY_URL =
   "https://api.giphy.com/v1/gifs/search?api_key=vfJyZ01MtzcR17VY7mNvlh43HDjhuuP8";
 

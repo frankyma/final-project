@@ -7,7 +7,8 @@ Uses a Material UI List library component.
 
 Change History:
     Pam - Create skeleton page to test routing. 
-    Frank - 
+    Frank - Load and view GIFs from Giphy API.  
+    Frank - Show Gifs on Swiper carousel, and implement Save functionality. 
     Pam - Add Header and Footer, flexbox layout
           and styling. Hide save button when
           carousel is hidden.               
@@ -46,6 +47,7 @@ function Carousel() {
   );
   const { trigger: updateSavedGifs } = useSWRMutation("savedGifs", updateGifs);
 
+  // Save the current GIF to jsonbin
   const onSaveGif = useCallback(() => {
     const gifKey = gifSearch.toLowerCase();
     const gifUrl = giphyResponse?.data[currentIndex]?.images.original.url;

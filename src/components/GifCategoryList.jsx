@@ -1,3 +1,12 @@
+/*************************************************** 
+                ImageGrid.jsx
+
+Shows a single category of Gifs in a list format.
+
+Change History:
+    Frank - Show Gifs using MUI Cards.
+*************************************************** */
+
 import {
   Button,
   Card,

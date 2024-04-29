@@ -7,7 +7,7 @@ Uses a Material UI List library component.
 
 Change History:
     Pam - Create skeleton page to test routing. 
-    Frank - 
+    Frank - Pull gifs from jsonbin and pass to GifCategoryList.
     Pam - Add Header and Footer.             
 *************************************************** */
 import Typography from "@mui/material/Typography";
@@ -24,6 +24,7 @@ function ImageGrid() {
 
   const { trigger: updateSavedGifs } = useSWRMutation("savedGifs", updateGifs);
 
+  // Delete a GIF from the savedGifs dictionary and update jsonbin
   const handleDelete = ({ category, url }) => {
     updateSavedGifs({
       ...savedGifs.record,
