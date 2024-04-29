@@ -1,3 +1,12 @@
+/*************************************************** 
+                ImageGrid.jsx
+
+Shows a single category of Gifs in a list format.
+
+Change History:
+    Frank - Show Gifs using MUI Cards.
+*************************************************** */
+
 import {
   Button,
   Card,
@@ -6,19 +15,25 @@ import {
   Typography,
 } from "@mui/material";
 
+import PropTypes from "prop-types";
+
 export default function GifCategoryList({ category, urlList, onDelete }) {
   return (
     <>
       <Typography variant="h4" component="h1">
-        {category}
+        {category.toUpperCase()}
       </Typography>
       {urlList.map((url, index) => (
-        <Card key={index} sx={{ minWidth: 275 }}>
+        <Card key={index} sx={{ minWidth: "40%", marginBottom: "1rem" }}>
           <CardContent>
-            <img src={url} alt={category} style={{ height: 200 }} />
+            <img src={url} alt={category} style={{ height: 240 }} />
           </CardContent>
           <CardActions>
-            <Button size="small" onClick={() => onDelete({ category, url })}>
+            <Button
+              variant="contained"
+              onClick={() => onDelete({ category, url })}
+              sx={{ margin: "auto" }}
+            >
               Delete
             </Button>
           </CardActions>
@@ -27,3 +42,9 @@ export default function GifCategoryList({ category, urlList, onDelete }) {
     </>
   );
 }
+
+GifCategoryList.propTypes = {
+  category: PropTypes.string,
+  urlList: PropTypes.array,
+  onDelete: PropTypes.func,
+};

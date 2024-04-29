@@ -7,7 +7,8 @@ Uses a Material UI List library component.
 
 Change History:
     Pam - Create skeleton page to test routing. 
-    Frank - 
+    Frank - Load and view GIFs from Giphy API.  
+    Frank - Show Gifs on Swiper carousel, and implement Save functionality. 
     Pam - Add Header and Footer, flexbox layout
           and styling. Hide save button when
           carousel is hidden.               
@@ -22,6 +23,7 @@ import { useCallback, useState } from "react";
 import { Swiper, SwiperSlide } from "swiper/react";
 import { Navigation, Pagination } from "swiper/modules";
 import useSWR from "swr";
+import styled from "styled-components";
 
 import "swiper/css";
 import "swiper/css/navigation";
@@ -30,6 +32,10 @@ import { newGifDict } from "../utils/utils.js";
 
 import NavBar from "../components/NavBar.jsx";
 import Footer from "../components/Footer.jsx";
+
+const Img = styled.img`
+  height: 400px;
+`;
 
 function Carousel() {
   const [gifSearch, setGifSearch] = useState("");
@@ -41,6 +47,7 @@ function Carousel() {
   );
   const { trigger: updateSavedGifs } = useSWRMutation("savedGifs", updateGifs);
 
+  // Save the current GIF to jsonbin
   const onSaveGif = useCallback(() => {
     const gifKey = gifSearch.toLowerCase();
     const gifUrl = giphyResponse?.data[currentIndex]?.images.original.url;
@@ -88,7 +95,6 @@ function Carousel() {
             <Box>
               <TextField
                 variant="outlined"
-                defaultValue="Gif Search"
                 label="Keyword"
                 value={gifSearch}
                 onChange={(e) => setGifSearch(e.target.value)}
@@ -106,14 +112,6 @@ function Carousel() {
           </Grid>
 
           <Grid item xs={12}>
-            {giphyResponse?.data && (
-              <Button variant="contained" onClick={onSaveGif} sx={{ mt: 5 }}>
-                Save
-              </Button>
-            )}
-          </Grid>
-
-          <Grid item xs={12}>
             <Box>
               {giphyResponse?.data && (
                 <Swiper
@@ -126,12 +124,19 @@ function Carousel() {
                 >
                   {giphyResponse?.data?.map((gif) => (
                     <SwiperSlide key={gif.id}>
-                      <img src={gif.images.original.url} alt={gif.title} />
+                      <Img src={gif.images.original.url} alt={gif.title} />
                     </SwiperSlide>
                   ))}
                 </Swiper>
               )}
             </Box>
+          </Grid>
+          <Grid item xs={12}>
+            {giphyResponse?.data && (
+              <Button variant="contained" onClick={onSaveGif} sx={{ mt: 5 }}>
+                Save
+              </Button>
+            )}
           </Grid>
         </Grid>
       </Box>
